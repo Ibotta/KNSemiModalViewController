@@ -78,6 +78,7 @@ typedef void (^KNTransitionCompletionBlock)(void);
 
 // Dismiss & resize
 -(void)resizeSemiView:(CGSize)newSize;
+-(void)resizeSemiView:(CGSize)newSize withDuration:(NSTimeInterval)duration animationOptions:(UIViewAnimationOptions) options;
 -(void)dismissSemiModalView;
 -(void)dismissSemiModalViewWithCompletion:(KNTransitionCompletionBlock)completion;
 

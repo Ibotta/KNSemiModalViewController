@@ -370,6 +370,13 @@ const struct KNSemiModalOptionKeys KNSemiModalOptionKeys = {
 }
 
 - (void)resizeSemiView:(CGSize)newSize {
+	NSTimeInterval duration = [[self ym_optionOrDefaultForKey:KNSemiModalOptionKeys.animationDuration] doubleValue];
+    [self resizeSemiView:newSize withDuration:duration animationOptions:0];
+}
+
+- (void)resizeSemiView:(CGSize)newSize
+          withDuration:(NSTimeInterval)duration
+      animationOptions:(UIViewAnimationOptions)animationOptions {
     UIView * target = [self parentTarget];
     UIView * modal = [target.subviews objectAtIndex:target.subviews.count-1];
     CGRect mf = modal.frame;
@@ -380,8 +387,7 @@ const struct KNSemiModalOptionKeys KNSemiModalOptionKeys = {
     UIButton * button = (UIButton*)[overlay viewWithTag:kSemiModalDismissButtonTag];
     CGRect bf = button.frame;
     bf.size.height = overlay.frame.size.height - newSize.height;
-	NSTimeInterval duration = [[self ym_optionOrDefaultForKey:KNSemiModalOptionKeys.animationDuration] doubleValue];
-	[UIView animateWithDuration:duration animations:^{
+	[UIView animateWithDuration:duration delay:0 options:animationOptions animations:^{
         modal.frame = mf;
         button.frame = bf;
     } completion:^(BOOL finished) {
